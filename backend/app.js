@@ -7,6 +7,7 @@ require('dotenv').config();
 const authRouter = require('./src/routes/api/auth');
 const dailyRateRouter = require('./src/routes/api/daily-rate');
 const productsRouter = require('./src/routes/api/products');
+const diaryRouter = require('./src/routes/api/diary');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/daily-rate', dailyRateRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/diary', diaryRouter);
 
 // Test Rotası (Tarayıcıdan kontrol için)
 app.get('/', (req, res) => {
