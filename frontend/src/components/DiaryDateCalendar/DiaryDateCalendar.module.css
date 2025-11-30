@@ -1,0 +1,56 @@
+.container {
+  margin-bottom: 30px;
+  margin-top: 30px; /* Header ile mesafe */
+}
+
+.dateWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.dateText {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 18px; /* Görseldeki gibi büyük puntolar */
+  color: var(--text-main);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+:global .react-datepicker__day--selected,
+:global .react-datepicker__day--keyboard-selected {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  border-radius: 50%; /* Kare yerine Yuvarlak olsun */
+}
+
+/* Hover (Üzerine gelince) Rengi */
+:global .react-datepicker__day--selected:hover,
+:global .react-datepicker__day:hover {
+  background-color: #e67522 !important; /* Hafif koyu turuncu */
+  border-radius: 50%;
+  color: white !important;
+}
+
+/* Bugünün Tarihi (Seçili değilse Turuncu yazı olsun) */
+:global .react-datepicker__day--today {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Takvimin Üst Başlığı (Ay/Yıl kısmı) - Daha temiz bir beyaz arka plan */
+:global .react-datepicker__header {
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+/* Gün isimleri (Mo, Tu, We...) */
+:global .react-datepicker__day-name {
+  color: var(--primary-color);
+  font-weight: bold;
+}

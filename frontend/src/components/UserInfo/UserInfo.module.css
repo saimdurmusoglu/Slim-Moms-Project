@@ -1,0 +1,58 @@
+.userInfoBar {
+  background-color: var(--bg-gray);
+  padding: 4px 0;
+  width: 100%;
+  height: 40px;
+}
+
+.content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.rightSide {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    height: 32px;
+}
+
+.name {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+  padding-right: 16px;
+  padding-bottom: 4px;
+  height: 32px;
+  border-right: 2px solid var(--text-gray);
+  display: flex;
+  align-items: flex-end;
+}
+
+/* .separator {
+    color: var(--text-gray);
+    height: 32px;
+} */
+
+.exitBtn {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  padding-bottom: 4px;
+  transition: color var(--transition-dur);
+}
+
+.exitBtn:hover {
+    color: var(--text-main);
+}

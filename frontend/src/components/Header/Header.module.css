@@ -1,0 +1,89 @@
+.headerWrapper {
+  /* UserInfo ile Header'ı kapsayan dış kutu */
+  width: 100%;
+}
+
+.header {
+  border-bottom: 2px solid var(--text-gray);
+  padding: 20px 0;
+  background-color: var(--secondary-color);
+  height: 80px;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Linki (Container) */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logoContainer img {
+  display: block;
+  width: 46.67px;
+  height: 44px;
+}
+
+/* --- LOGO YAZISI (SlimMom) --- */
+.logoText {
+  font-family: var(--font-family-main);
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+}
+
+.textSlim {
+  color: var(--text-main);
+  font-weight: var(--font-weight-thin);
+}
+
+.textMom {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-thin);
+  margin-left: 1px;
+}
+
+/* --- SAĞ TARAF --- */
+.authNav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navLink {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color var(--transition-dur) var(--transition-func);
+}
+
+.navLink:hover,
+.activeLink {
+  color: var(--text-main);
+}
+
+/* .separator {
+    color: var(--text-secondary);
+} */
+
+.menuBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

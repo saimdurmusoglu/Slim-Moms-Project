@@ -1,0 +1,64 @@
+.sidebar {
+  background-color: #F0F1F3; /* Görseldeki Gri Arka Plan */
+  width: 100%;
+  padding: 40px 0 80px 0; /* Üstten ve alttan boşluk */
+  /* Mobilde sayfanın en altına yapışacak */
+  margin-top: 41px;
+  flex-grow: 1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Summary ile Food arası boşluk */
+}
+
+.title {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  color: var(--text-main);
+  margin-bottom: 20px;
+}
+
+/* --- SUMMARY LISTESI --- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 280px; /* Genişliği kısıtla */
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* --- FOOD LISTESI --- */
+.foodList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding-left: 20px; /* Numaralar görünsün */
+}
+
+.foodItem {
+    text-transform: capitalize;
+}
+
+.placeholder {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.textRed {
+    color: #e63946; /* Canlı bir kırmızı */
+    font-weight: bold;
+}
+
+/* Tablet ve Desktop için ileride buraya @media query ekleyeceğiz (Yan tarafa geçmesi için) */
+/* Şimdilik Mobile First: Alt alta duruyorlar. */

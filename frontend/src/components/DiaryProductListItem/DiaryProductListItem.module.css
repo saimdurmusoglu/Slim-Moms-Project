@@ -1,0 +1,70 @@
+.item {
+  display: flex;
+  align-items: baseline; /* Yazıları aynı hizada tut */
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+/* Her bir alanın alt çizgisi var */
+.name {
+  flex-grow: 1; /* İsmi uzat */
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 8px;
+  margin-right: 10px;
+}
+
+.weight {
+  width: 50px;
+  text-align: right;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 8px;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+.calories {
+  width: 60px;
+  text-align: right;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 8px;
+  margin-right: 20px; /* X butonu ile mesafe */
+}
+
+.unit {
+  font-size: 10px; /* 'kcal' yazısı daha küçük */
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.deleteBtn:hover {
+    color: var(--primary-color);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* İki ikon arası boşluk */
+}
+
+.actionBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.actionBtn:hover {
+    transform: scale(1.2);
+}

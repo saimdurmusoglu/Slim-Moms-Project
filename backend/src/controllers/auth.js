@@ -76,9 +76,26 @@ const getCurrent = async (req, res) => {
   });
 };
 
+// --- LOGOUT (ÇIKIŞ) ---
+const logout = async (req, res, next) => {
+  try {
+    const { _id } = req.user; // Middleware sayesinde ID elimizde
+
+    // Veritabanındaki token'ı sil (null yap)
+    await User.findByIdAndUpdate(_id, { token: null });
+
+    // 204 No Content: Başarılı ama dönecek veri yok
+    res.status(204).json();
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 // --- EXPORT ---
 module.exports = {
     register,
     login,
-    getCurrent, // Bunu dışarı açmayı unutma!
+    getCurrent,
+    logout,
 };

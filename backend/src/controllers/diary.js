@@ -124,8 +124,55 @@ const getDayInfo = async (req, res, next) => {
   }
 };
 
+// --- 4. YİYECEK GÜNCELLEME (UPDATE) ---
+const updateProduct = async (req, res, next) => {
+  try {
+    const { _id: userId } = req.user;
+    const { productId } = req.params; // Güncellenecek kaydın ID'si (product ID'si değil, listedeki satır ID'si)
+    const { weight, date } = req.body; // Yeni gramaj ve tarih
+
+    // 1. Günlüğü bul
+    const diary = await Diary.findOne({ owner: userId, date });
+    if (!diary) {
+      return res.status(404).json({ message: "Diary not found" });
+    }
+
+    // 2. Güncellenecek satırı bul
+    const itemIndex = diary.products.findIndex(item => item._id.toString() === productId);
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: "Product not found in diary" });
+    }
+
+    // 3. Ürünün orijinal kalori bilgisini bulmamız lazım
+    // Listede sadece o anki kalori var. O yüzden Product veritabanına soralım.
+    const productInfo = await Product.findById(diary.products[itemIndex].product);
+    
+    // 4. Yeni kaloriyi hesapla
+    const newCalories = Math.round((productInfo.calories / 100) * weight);
+
+    // 5. Verileri güncelle
+    diary.products[itemIndex].weight = weight;
+    diary.products[itemIndex].calories = newCalories;
+
+    await diary.save();
+
+    res.json({
+      status: 'success',
+      code: 200,
+      data: {
+        product: diary.products[itemIndex],
+        diary
+      }
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addProduct,
   removeProduct,
   getDayInfo,
+  updateProduct,
 };

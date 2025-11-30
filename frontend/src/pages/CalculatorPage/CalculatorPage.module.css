@@ -1,0 +1,6 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  /* Header yüksekliği (yaklaşık 85px) hariç tüm ekranı kapla */
+  min-height: calc(100vh - 85px); 
+}

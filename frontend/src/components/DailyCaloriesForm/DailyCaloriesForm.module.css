@@ -1,0 +1,123 @@
+.formContainer {
+  padding-top: 30px;
+}
+.title {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--text-main);
+  margin-bottom: 30px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.inputGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+  letter-spacing: 0.04em;
+}
+.input {
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background: transparent;
+  padding: 5px 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-main);
+  outline: none;
+  transition: border-color var(--transition-dur);
+}
+.input:focus {
+  border-bottom-color: var(--primary-color);
+}
+.error {
+  position: absolute;
+  bottom: -20px;
+  font-size: 12px;
+  color: #eb5757;
+}
+.radioGroupWrapper {
+  margin-top: 10px;
+}
+.radioGroup {
+  display: flex;
+  gap: 25px;
+  margin-top: 10px;
+}
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.radioCustom {
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.2s;
+}
+.radioInput:checked ~ .radioCustom {
+  border-color: var(--primary-color);
+}
+.radioInput:checked ~ .radioCustom::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary-color);
+}
+.radioTextActive {
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+}
+.radioText {
+  font-weight: var(--font-weight-normal);
+  color: var(--text-secondary);
+}
+.submitBtn {
+  width: 210px;
+  height: 44px;
+  margin: 40px auto 0 auto;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 30px;
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+  cursor: pointer;
+  transition: all var(--transition-dur);
+}
+.submitBtn:hover {
+  background-color: #e67522;
+}

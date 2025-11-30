@@ -1,0 +1,114 @@
+.wrapper {
+    width: 100%;
+}
+
+/* --- YENİ GRİ BAR --- */
+.headerBar {
+    width: 100%;
+    height: 40px; /* Görseldeki ince şerit */
+    background-color: #EFF1F3; /* Gri Renk */
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-bottom: 40px; /* İçerikle arası */
+}
+
+.backBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* --- İÇERİK (Eski container stilini güncelledik) --- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px 40px 20px; /* Kenar boşluklarını buraya taşıdık */
+}
+
+/* Diğer stiller aynen kalıyor... */
+.title {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 18px;
+  color: var(--text-main);
+  margin-bottom: 40px;
+  max-width: 280px;
+}
+
+.resultWrapper {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 30px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.calories {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 48px;
+  color: #264061;
+  margin-right: 10px;
+}
+
+.unit {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 16px;
+  color: #264061;
+}
+
+.listWrapper {
+  text-align: left;
+  max-width: 280px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.listTitle {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  color: var(--text-main);
+  margin-bottom: 20px;
+}
+
+.list {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  padding-left: 20px;
+}
+
+.listItem {
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  width: 210px;
+  height: 44px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+  transition: background-color var(--transition-dur);
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #e67522;
+}

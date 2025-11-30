@@ -15,4 +15,8 @@ router.post('/add', ctrl.addProduct);
 // 3. Yiyecek Sil (:diaryId günlüğün ID'si, :productId ise satırın ID'si)
 router.delete('/:diaryId/:productId', ctrl.removeProduct);
 
+// 4. Ürün Güncelleme (PATCH metodu kullanılır)
+// URL: /api/diary/update/:productId
+router.patch('/update/:productId', ctrl.updateProduct);
+
 module.exports = router;
