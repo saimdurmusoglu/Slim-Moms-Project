@@ -19,7 +19,7 @@ const DiaryProductListItem = ({product, onDelete, onEdit}) => {
           aria-label={`Edit ${product.title}`}
           title="Edit product"
         >
-          <EditIcon width="12" height="12" />
+          <EditIcon className={styles.icon} width="12" height="12" />
         </button>
 
         <button
@@ -29,7 +29,7 @@ const DiaryProductListItem = ({product, onDelete, onEdit}) => {
           aria-label={`Delete ${product.title}`}
           title="Delete product"
         >
-          <CloseIcon width="12" height="12" />
+          <CloseIcon className={styles.icon} width="12" height="12" />
         </button>
       </div>
     </div>
