@@ -57,26 +57,12 @@
 }
 
 .productList::-webkit-scrollbar-thumb {
-  /* burda 6x40px sabit ayar yapılabilir ama tam aşağı ve yukarı hareket etmez
-  background-color: transparent;
-  background-image: linear-gradient(var(--bg-main), var(--bg-main));
-  background-size: 6px 40px;
-  background-repeat: no-repeat;
-  background-position:center;
-  border-radius: 0;
-  min-height: 40px; 
-  onu için değişen kendi yapısını kullanmayı uygun buldum. 
-  ama bu kodu da vereyim dedim. burda liste uzadıkça çubuk uzunluğu kısalır*/
-
   background-color: var(--bg-main);
   border-radius: 0;
   min-height: 40px;
 }
 
 .productList::-webkit-scrollbar-thumb:hover {
-  /* ilk tercih için 
-  background-image: var(--bg-main-hover);
-  */
   background-color: var(--bg-main-hover);
 }
 
@@ -226,5 +212,108 @@
     .withBackground {
       background-image: url("../../assets/images/login-register-bg-desktop@2x.jpg");
     }
+  }
+}
+
+/* =========================================
+   YENİ: SİLME ONAY MODALI STİLLERİ
+   ========================================= */
+
+.confirmModal {
+  padding: 20px;
+  text-align: center;
+}
+
+.confirmTitle {
+  font-family: var(--font-family-main);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: var(--text-main);
+  text-transform: uppercase;
+}
+
+.confirmText {
+  font-family: var(--font-family-main);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.confirmBtn,
+.cancelBtn {
+  width: 120px;
+  height: 44px;
+  border-radius: 30px;
+  border: none;
+  font-family: var(--font-family-main);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.confirmBtn {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.4);
+}
+
+.cancelBtn {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.confirmBtn:hover {
+  background-color: var(--btn-hover);
+  transform: scale(1.05);
+}
+
+.cancelBtn:hover {
+  background-color: rgba(252, 132, 45, 0.1);
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 320px) {
+  .confirmActions {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .confirmModal {
+    padding: 60px 20px 40px 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+
+  .confirmTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .confirmText {
+    font-size: 16px;
+    margin-bottom: 35px;
+    max-width: 350px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .confirmModal {
+    padding-top: 80px;
   }
 }

@@ -4,7 +4,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-right: 20px; 
+  padding-right: 0; 
 }
 
 .name {
@@ -28,10 +28,89 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0 0 0 15px;
+  padding: 0 20px 0 15px; 
   transition: color 0.3s;
 }
 
 .exitBtn:hover {
   color: var(--text-main);
+}
+
+/* --- MODAL İÇERİK STİLLERİ --- */
+.logoutModalContent {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.modalTitle {
+  font-family: var(--font-family-main);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: var(--text-main);
+  text-transform: uppercase;
+}
+
+.modalText {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.confirmBtn, .cancelBtn {
+  width: 110px;
+  height: 44px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.confirmBtn {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.4);
+}
+
+.cancelBtn {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.confirmBtn:hover, .cancelBtn:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================
+   TABLET TASARIMI (min-width: 768px)
+   ========================================= */
+@media screen and (min-width: 768px) {
+  .userInfoBox {
+    padding-right: 20px; 
+  }
+  
+  .exitBtn {
+    padding: 0 0 0 15px;
+  }
+
+  .logoutModalContent {
+    padding: 60px 20px 40px 20px;
+  }
+}
+
+/* =========================================
+   DESKTOP TASARIMI (min-width: 1280px)
+   ========================================= */
+@media screen and (min-width: 1280px) {
+  .userInfoBox {
+    padding-right: 0px; 
+  }
 }
