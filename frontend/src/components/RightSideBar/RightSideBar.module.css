@@ -1,32 +1,36 @@
+/* --- MOBİL (Varsayılan) --- */
 .sidebar {
-  background-color: #F0F1F3; /* Görseldeki Gri Arka Plan */
-  width: 100%;
-  padding: 40px 0 80px 0; /* Üstten ve alttan boşluk */
-  /* Mobilde sayfanın en altına yapışacak */
-  margin-top: 41px;
-  flex-grow: 1;
+  background-color: var(--bg-gray-2);
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 40px 20px 24px 20px;
+  box-sizing: border-box;
+  height: 433px;
+  margin-top: 0;
 }
 
-.content {
+.contentWrapper {
   display: flex;
   flex-direction: column;
-  gap: 40px; /* Summary ile Food arası boşluk */
+  gap: 40px;
+  width: 100%;
 }
 
 .title {
   font-family: var(--font-family-main);
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   font-size: 14px;
   color: var(--text-main);
   margin-bottom: 20px;
 }
 
-/* --- SUMMARY LISTESI --- */
 .list {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 280px; /* Genişliği kısıtla */
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .listItem {
@@ -36,29 +40,119 @@
   color: var(--text-secondary);
 }
 
-/* --- FOOD LISTESI --- */
 .foodList {
   display: flex;
   flex-direction: column;
   gap: 10px;
   font-size: 14px;
   color: var(--text-secondary);
-  padding-left: 20px; /* Numaralar görünsün */
+  padding-left: 0;
+  margin: 0;
 }
 
 .foodItem {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .placeholder {
   font-size: 14px;
   color: var(--text-secondary);
+  letter-spacing: 0.04em;
 }
 
 .textRed {
-    color: #e63946; /* Canlı bir kırmızı */
-    font-weight: bold;
+  color: var(--error-color);
+  font-weight: 700;
 }
 
-/* Tablet ve Desktop için ileride buraya @media query ekleyeceğiz (Yan tarafa geçmesi için) */
-/* Şimdilik Mobile First: Alt alta duruyorlar. */
+/* =========================================
+   TABLET TASARIMI (min-width: 768px)
+   ========================================= */
+@media screen and (min-width: 768px) {
+  .sidebar {
+    margin-left: -32px;
+    margin-right: -32px;
+    width: calc(100% + 64px);
+    background-color: var(--bg-gray-2);
+    background-image: url("../../assets/images/dashboard-login-bg-tablet@1x.png");
+    background-repeat: no-repeat;
+    background-position: right -20px bottom 0;
+    background-size: 428px auto;
+    padding: 80px 32px 0;
+    height: 326px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .sidebar {
+      background-image: url("../../assets/images/dashboard-login-bg-tablet@2x.png");
+    }
+  }
+
+  .containerWrapper {
+    width: 100%;
+    padding: 0;
+  }
+
+  .contentWrapper {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 80px;
+    width: 100%;
+  }
+
+  .summarySection,
+  .foodSection {
+    width: 250px;
+    flex-shrink: 0;
+  }
+}
+
+/* =========================================
+   DESKTOP TASARIMI (min-width: 1280px)
+   ========================================= */
+@media screen and (min-width: 1280px) {
+  .sidebar {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-gray-2);
+    background-image: url("../../assets/images/dashboard-login-bg-desktop@1x.png");
+    background-repeat: no-repeat;
+    background-position: right top 30px;
+    background-size: 500px auto;
+    display: block;
+    padding-top: 290px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .diaryPadding {
+    padding-top: 290px;
+  }
+
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .sidebar {
+      background-image: url("../../assets/images/dashboard-login-bg-desktop@2x.png");
+    }
+  }
+
+  .containerWrapper {
+    width: 100%;
+    padding: 0;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    gap: 56px;
+    padding-left: 102px;
+    width: 100%;
+  }
+
+  .summarySection,
+  .foodSection {
+    width: 288px;
+  }
+}

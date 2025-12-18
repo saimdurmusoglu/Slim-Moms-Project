@@ -1,11 +1,11 @@
 .overlay {
   position: fixed;
-  top: 80px; 
+  top: 80px;
   left: 0;
   width: 100vw;
   height: calc(100vh - 80px);
   background-color: var(--bg-main);
-  z-index: 100;
+  z-index: 200;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,31 +13,30 @@
 }
 
 .menuContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+   width: 100%;
+   display: flex;
+   justify-content: center;
 }
 
 .menuLinks {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   align-items: center;
 }
 
 .link {
-    font-family: var(--font-family-main);
-    font-weight: var(--font-weight-bold);
-    font-size: 18px;
-    line-height: normal;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color var(--transition-dur);
+   font-family: var(--font-family-main);
+   font-weight: 700;
+   font-size: 18px;
+   letter-spacing: 0.04em;
+   text-transform: uppercase;
+   color: var(--text-secondary);
+   text-decoration: none;
+   transition: color 0.3s ease;
 }
 
 .link:hover,
 .activeLink {
-    color: var(--secondary-color);
+   color: var(--secondary-color);
 }

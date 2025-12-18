@@ -1,6 +1,6 @@
 .container {
-  margin-bottom: 30px;
-  margin-top: 30px; /* Header ile mesafe */
+  margin-bottom: 32px;
+  margin-top: 0px;
 }
 
 .dateWrapper {
@@ -13,7 +13,9 @@
 .dateText {
   font-family: var(--font-family-main);
   font-weight: var(--font-weight-bold);
-  font-size: 18px; /* Görseldeki gibi büyük puntolar */
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: 0;
   color: var(--text-main);
 }
 
@@ -22,34 +24,43 @@
   height: 20px;
 }
 
+/* =========================================
+   TABLET ve DESKTOP TASARIMI (min-width: 768px)
+   ========================================= */
+@media screen and (min-width: 768px) {
+  .container {
+    margin-bottom: 60px;
+  }
+
+  .dateText {
+    font-size: 34px;
+  }
+}
+
 :global .react-datepicker__day--selected,
 :global .react-datepicker__day--keyboard-selected {
   background-color: var(--primary-color) !important;
-  color: #fff !important;
-  border-radius: 50%; /* Kare yerine Yuvarlak olsun */
+  color: var(--secondary-color) !important;
+  border-radius: 50%;
 }
 
-/* Hover (Üzerine gelince) Rengi */
 :global .react-datepicker__day--selected:hover,
 :global .react-datepicker__day:hover {
-  background-color: #e67522 !important; /* Hafif koyu turuncu */
+  background-color: var(--btn-hover) !important;
   border-radius: 50%;
-  color: white !important;
+  color: var(--secondary-color) !important;
 }
 
-/* Bugünün Tarihi (Seçili değilse Turuncu yazı olsun) */
 :global .react-datepicker__day--today {
   color: var(--primary-color);
   font-weight: bold;
 }
 
-/* Takvimin Üst Başlığı (Ay/Yıl kısmı) - Daha temiz bir beyaz arka plan */
 :global .react-datepicker__header {
-  background-color: #FFFFFF !important;
-  border-bottom: 1px solid #E0E0E0;
+  background-color: var(--secondary-color) !important;
+  border-bottom: 1px solid var(--text-gray);
 }
 
-/* Gün isimleri (Mo, Tu, We...) */
 :global .react-datepicker__day-name {
   color: var(--primary-color);
   font-weight: bold;

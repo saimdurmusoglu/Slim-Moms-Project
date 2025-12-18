@@ -6,11 +6,9 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      // credentials = { name, email, password }
       const { data } = await instance.post('/auth/register', credentials);
       return data;
     } catch (error) {
-        // Backend'den gelen hata mesajını yakala
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
@@ -22,7 +20,6 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await instance.post('/auth/login', credentials);
-      // Gelen token'ı Axios başlığına ekle
       setToken(data.data.token);
       return data;
     } catch (error) {
@@ -34,7 +31,7 @@ export const logIn = createAsyncThunk(
 // 3. ÇIKIŞ YAPMA (Logout)
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await instance.post('/auth/logout'); // Backend'de logout rotası yoksa burası hata verebilir, şimdilik dursun
+    await instance.post('/auth/logout');
     clearToken();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -45,7 +42,6 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 export const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
-    // State'ten token'ı al
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
@@ -54,7 +50,6 @@ export const fetchCurrentUser = createAsyncThunk(
     }
 
     try {
-      // Token'ı başlığa ekle (api.js'deki interceptor zaten yapıyor ama garanti olsun)
       setToken(persistedToken);
       const { data } = await instance.get('/auth/current');
       return data;

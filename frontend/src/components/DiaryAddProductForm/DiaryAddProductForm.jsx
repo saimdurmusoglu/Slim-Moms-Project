@@ -1,66 +1,57 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { instance } from '../../services/api';
-import styles from './DiaryAddProductForm.module.css';
-import returnIcon from '../../assets/icons/return-left.svg';
+import {useState, useEffect} from "react";
+import {useSelector} from "react-redux";
+import {instance} from "../../services/api";
+import styles from "./DiaryAddProductForm.module.css";
+import ReturnIcon from "../../assets/icons/return-left.svg?react";
+import PlusIcon from "../../assets/icons/plus.svg?react";
 
-const DiaryAddProductForm = ({ onSave, onClose, initialData = null }) => {
-  // 1. STATE BAŞLANGIÇ DEĞERLERİNİ BURADA AYARLIYORUZ (useEffect yerine)
-  const [productName, setProductName] = useState(initialData?.title || '');
-  const [grams, setGrams] = useState(initialData?.weight || '');
+const DiaryAddProductForm = ({
+  onSave,
+  onClose,
+  initialData = null,
+  isMobile = false,
+}) => {
+  const [productName, setProductName] = useState(initialData?.title || "");
+  const [grams, setGrams] = useState(initialData?.weight || "");
   const [selectedProductId, setSelectedProductId] = useState(
-    initialData ? (initialData.product?._id || initialData.product) : null
+    initialData ? initialData.product?._id || initialData.product : null
   );
-  
+
   const [suggestions, setSuggestions] = useState([]);
   const [showList, setShowList] = useState(false);
 
   const token = useSelector((state) => state.auth.token);
 
-  // --- API İSTEĞİ (ARAMA) ---
   useEffect(() => {
-    // Token yoksa, yazı kısaysa veya düzenleme modunda isim değişmediyse arama yapma
-    if (!token || productName.length < 2) {
-      return; 
-    }
-    
-    if (initialData && productName === initialData.title) {
-        return;
-    }
+    if (!token || productName.length < 2) return;
+
+    if (selectedProductId) return;
+
+    if (initialData && productName === initialData.title) return;
 
     const timeoutId = setTimeout(async () => {
       try {
-        const config = { headers: { Authorization: `Bearer ${token}` } };
-        const { data } = await instance.get(`/products?search=${productName}`, config);
-        
-        const products = data.data?.result || []; 
-
-        if (products.length > 0) {
-            setSuggestions(products);
-            setShowList(true);
-        } else {
-            setSuggestions([]);
-            setShowList(false);
-        }
-
+        const config = {headers: {Authorization: `Bearer ${token}`}};
+        const {data} = await instance.get(
+          `/products?search=${productName}`,
+          config
+        );
+        const products = data.data?.result || [];
+        setSuggestions(products);
+        setShowList(products.length > 0);
       } catch (error) {
         console.error("Search error:", error);
       }
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [productName, token, initialData]);
+  }, [productName, token, initialData, selectedProductId]);
 
-  // --- HANDLERS ---
-  
   const handleInputChange = (e) => {
     const value = e.target.value;
     setProductName(value);
-    
-    // Eğer isim değişirse ve eski isimle aynı değilse ID'yi sıfırla
-    if (!initialData || value !== initialData.title) {
-        setSelectedProductId(null);
-    }
+
+    if (!initialData || value !== initialData.title) setSelectedProductId(null);
 
     if (value.length < 2) {
       setSuggestions([]);
@@ -76,7 +67,6 @@ const DiaryAddProductForm = ({ onSave, onClose, initialData = null }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!selectedProductId) {
       alert("Please select a product from the list.");
       return;
@@ -85,41 +75,64 @@ const DiaryAddProductForm = ({ onSave, onClose, initialData = null }) => {
       alert("Please enter grams.");
       return;
     }
-
     onSave({
       productId: selectedProductId,
       weight: Number(grams),
     });
+    setProductName("");
+    setGrams("");
+    setSelectedProductId(null);
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.headerBar}>
-        <button type="button" className={styles.backBtn} onClick={onClose}>
-          <img src={returnIcon} alt="Back" />
-        </button>
-      </div>
+    <div
+      className={`${styles.container} ${
+        !isMobile ? styles.desktopContainer : ""
+      }`}
+    >
+      {isMobile && (
+        <div className={styles.headerBar}>
+          <button
+            type="button"
+            className={styles.backBtn}
+            onClick={onClose}
+            aria-label="Go back to diary"
+          >
+            <ReturnIcon width="18" height="12" />
+          </button>
+        </div>
+      )}
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        
+      <form
+        className={`${styles.form} ${!isMobile ? styles.desktopForm : ""}`}
+        onSubmit={handleSubmit}
+      >
         <div className={styles.inputGroup}>
-          <label className={styles.label}>Enter product name</label>
+          {isMobile && (
+            <label htmlFor="productSearch" className="visually-hidden">
+              Enter product name
+            </label>
+          )}
+
           <input
+            id="productSearch"
             type="text"
             className={styles.input}
             value={productName}
             onChange={handleInputChange}
             autoComplete="off"
-            placeholder="Search food..."
+            placeholder={!isMobile ? "Enter product name" : ""}
+            aria-label="Search for a product"
           />
-          
+
           {showList && suggestions.length > 0 && (
-            <ul className={styles.suggestionsList}>
+            <ul className={styles.suggestionsList} role="listbox">
               {suggestions.map((product) => (
-                <li 
-                  key={product._id} 
+                <li
+                  key={product._id}
                   className={styles.suggestionItem}
                   onMouseDown={() => handleSelectProduct(product)}
+                  role="option"
                 >
                   {product.title.en} ({product.calories} kcal)
                 </li>
@@ -128,18 +141,40 @@ const DiaryAddProductForm = ({ onSave, onClose, initialData = null }) => {
           )}
         </div>
 
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Grams</label>
+        <div className={`${styles.inputGroup} ${styles.gramsGroup}`}>
+          {isMobile && (
+            <label htmlFor="gramsInput" className="visually-hidden">
+              Grams
+            </label>
+          )}
           <input
+            id="gramsInput"
             type="number"
             className={styles.input}
             value={grams}
             onChange={(e) => setGrams(e.target.value)}
+            placeholder={!isMobile ? "Grams" : ""}
+            aria-label="Weight in grams"
           />
         </div>
 
-        <button type="submit" className={styles.addBtn}>
-            {initialData ? 'Update' : 'Add'}
+        <button
+          type="submit"
+          className={`${styles.addBtn} ${
+            !isMobile ? styles.desktopAddBtn : ""
+          }`}
+          aria-label="Add product to diary"
+          title="Add product"
+        >
+          {isMobile ? (
+            initialData ? (
+              "Update"
+            ) : (
+              "Add"
+            )
+          ) : (
+            <PlusIcon width="14" height="14" />
+          )}
         </button>
       </form>
     </div>

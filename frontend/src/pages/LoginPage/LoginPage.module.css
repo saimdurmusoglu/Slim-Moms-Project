@@ -1,15 +1,30 @@
-/* --- İÇERİK ve BAŞLIK --- */
+/* --- MOBİL --- */
+.authSection {
+  background-color: var(--secondary-color);
+  width: 100%;
+  height: 100%;
+}
+
+.loginSection {
+  padding-top: 40px;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 10;
+  padding-bottom: 175px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
+  padding: 0 20px;
 }
 
 .title {
   color: var(--primary-color);
   font-family: var(--font-family-main);
   font-size: 14px;
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   line-height: normal;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -17,49 +32,50 @@
   margin-bottom: 55px;
 }
 
-/* --- FORM YAPISI --- */
 .form {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  width: 100%;
+  width: 280px;
 }
 
 .inputGroup {
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 36px;
 }
 
 .label {
   color: var(--text-secondary);
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   font-size: 14px;
   line-height: normal;
   letter-spacing: 0.04em;
   margin-bottom: 5px;
-  transition: color var(--transition-dur) var(--transition-func);
+  transition: color var(--transition-dur);
+  height: 16px;
 }
 
 .input {
   border: none;
   border-bottom: 1px solid var(--text-gray);
-  padding: 5px 0;
+  padding: 0 0 5px 0;
   font-size: 14px;
-  line-height: normal;
-  letter-spacing: 0.04em;
   color: var(--text-main);
   background: transparent;
   outline: none;
-  transition: border-color var(--transition-dur) var(--transition-func);
+  transition: border-color var(--transition-dur);
+  width: 100%;
+  height: 20px;
 }
 
 .input:focus {
   border-bottom: 1px solid var(--primary-color);
 }
 
-.input:focus + .label {
+.inputGroup:focus-within .label {
   color: var(--primary-color);
 }
 
@@ -68,10 +84,9 @@
   font-size: 12px;
   margin-top: 4px;
   position: absolute;
-  bottom: -30px;
+  bottom: -20px;
 }
 
-/* --- BUTONLAR --- */
 .buttonGroup {
   margin-top: 20px;
   display: flex;
@@ -85,19 +100,16 @@
   height: 44px;
   border-radius: 30px;
   font-family: var(--font-family-main);
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   font-size: 14px;
-  line-height: normal;
-  letter-spacing: 0.04em;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: all var(--transition-dur) var(--transition-func);
+  transition: all var(--transition-dur);
 }
 
-/* Log in Butonu (Turuncu) */
 .btnPrimary {
   background-color: var(--primary-color);
   color: var(--secondary-color);
@@ -109,7 +121,6 @@
   background-color: var(--btn-hover);
 }
 
-/* Register Butonu (Beyaz) */
 .btnSecondary {
   background-color: var(--secondary-color);
   color: var(--primary-color);
@@ -118,4 +129,84 @@
 
 .btnSecondary:hover {
   background-color: var(--btn-secondary-hover);
+}
+
+/* =========================================
+   TABLET TASARIMI (min-width: 768px)
+   ========================================= */
+@media screen and (min-width: 768px) {
+  .loginSection {
+    padding-top: 0 32px;
+
+    /* Görsel Yolu */
+    background-image: url("../../assets/images/login-register-bg-tablet@1x.jpg");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: auto 1024px;
+    min-height: 945px;
+  }
+
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .loginSection {
+      background-image: url("../../assets/images/login-register-bg-tablet@2x.jpg");
+    }
+  }
+
+  .content {
+    align-items: flex-start;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .title {
+    margin-top: 160px;
+    margin-bottom: 55px;
+    text-align: left;
+  }
+
+  .form {
+    width: 240px;
+    align-items: flex-start;
+  }
+
+  .inputGroup {
+    width: 240px;
+  }
+
+  .buttonGroup {
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+/* =========================================
+   DESKTOP TASARIMI (min-width: 1280px)
+   ========================================= */
+@media screen and (min-width: 1280px) {
+  .loginSection {
+    padding-top: 160px;
+
+    background-image: url("../../assets/images/login-register-bg-desktop@1x.jpg");
+    background-position: right top;
+    background-size: auto 850px;
+    min-height: 850px;
+  }
+
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .loginSection {
+      background-image: url("../../assets/images/login-register-bg-desktop@2x.jpg");
+    }
+  }
+
+  .content {
+    padding-left: 16px;
+  }
+
+  .form {
+    width: 382px;
+  }
+
+  .title {
+    margin-bottom: 60px;
+  }
 }

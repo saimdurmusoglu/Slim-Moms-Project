@@ -1,50 +1,56 @@
 .wrapper {
-    width: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* --- YENİ GRİ BAR --- */
+/* --- GRİ BAR --- */
 .headerBar {
-    width: 100%;
-    height: 40px; /* Görseldeki ince şerit */
-    background-color: #EFF1F3; /* Gri Renk */
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    margin-bottom: 40px; /* İçerikle arası */
+  width: 100%;
+  height: 40px;
+  background-color: var(--bg-gray);
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  margin-bottom: 40px;
 }
 
 .backBtn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
-/* --- İÇERİK (Eski container stilini güncelledik) --- */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0 20px 40px 20px; /* Kenar boşluklarını buraya taşıdık */
+  width: 100%;
+  padding: 0 20px 40px 20px;
 }
 
-/* Diğer stiller aynen kalıyor... */
 .title {
   font-family: var(--font-family-main);
   font-weight: var(--font-weight-bold);
   font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0;
   color: var(--text-main);
-  margin-bottom: 40px;
-  max-width: 280px;
+  margin-bottom: 42px;
+  max-width: 100%;
+  text-align: left;
 }
 
 .resultWrapper {
   margin-bottom: 30px;
-  border-bottom: 1px solid #E0E0E0;
-  padding-bottom: 30px;
+  border-bottom: 1px solid var(--text-gray);
+  padding-bottom: 32px;
   width: 100%;
   max-width: 280px;
 }
@@ -53,15 +59,20 @@
   font-family: var(--font-family-main);
   font-weight: var(--font-weight-bold);
   font-size: 48px;
-  color: #264061;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  color: var(--bg-main); 
   margin-right: 10px;
+  height: 62px;
 }
 
 .unit {
   font-family: var(--font-family-main);
   font-weight: var(--font-weight-bold);
   font-size: 16px;
-  color: #264061;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  color: var(--bg-main);
 }
 
 .listWrapper {
@@ -75,6 +86,8 @@
   font-family: var(--font-family-main);
   font-weight: var(--font-weight-bold);
   font-size: 14px;
+  line-height: normal;
+  letter-spacing: 0.04em;
   color: var(--text-main);
   margin-bottom: 20px;
 }
@@ -82,9 +95,9 @@
 .list {
   color: var(--text-secondary);
   font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  padding-left: 20px;
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+  letter-spacing: 0.04em;
 }
 
 .listItem {
@@ -96,13 +109,14 @@
   background-color: var(--primary-color);
   color: var(--secondary-color);
   width: 210px;
-  height: 44px;
+  height: 43px;
   border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: var(--font-weight-bold);
   font-size: 14px;
+  line-height: normal;
   letter-spacing: 0.04em;
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
   transition: background-color var(--transition-dur);
@@ -110,5 +124,41 @@
 }
 
 .btn:hover {
-  background-color: #e67522;
+  background-color: var(--btn-hover);
+}
+
+/* =========================================
+   TABLET VE DESKTOP (768px ve üzeri)
+   ========================================= */
+@media screen and (min-width: 768px) {
+  .headerBar {
+    display: none;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .title {
+    font-size: 26px;
+    text-align: center;
+    max-width: 508px;
+    max-height: 70px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+
+  .resultWrapper {
+    margin-bottom: 12px;
+    padding-bottom: 32px;
+    max-width: 330px;
+  }
+
+  .listWrapper {
+    max-width: 330px;
+  }
+
+  .listTitle {
+    margin-top: 0;
+  }
 }

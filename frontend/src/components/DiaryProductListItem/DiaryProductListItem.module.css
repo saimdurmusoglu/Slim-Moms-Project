@@ -1,58 +1,56 @@
+/* --- MOBİL (Varsayılan) --- */
 .item {
   display: flex;
-  align-items: baseline; /* Yazıları aynı hizada tut */
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
   font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
   color: var(--text-main);
+  padding-right: 20px;
 }
 
-/* Her bir alanın alt çizgisi var */
 .name {
-  flex-grow: 1; /* İsmi uzat */
-  border-bottom: 1px solid #E0E0E0;
+  flex: 1;
+  min-width: 0;
+  border-bottom: 1px solid var(--text-gray); 
   padding-bottom: 8px;
-  margin-right: 10px;
+  margin-right: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .weight {
   width: 50px;
   text-align: right;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid var(--text-gray);
   padding-bottom: 8px;
-  margin-right: 10px;
+  margin-right: 8px;
   white-space: nowrap;
 }
 
 .calories {
-  width: 60px;
+  width: 65px; 
   text-align: right;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid var(--text-gray);
   padding-bottom: 8px;
-  margin-right: 20px; /* X butonu ile mesafe */
+  margin-right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .unit {
-  font-size: 10px; /* 'kcal' yazısı daha küçük */
-}
-
-.deleteBtn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  color: var(--text-secondary);
-  transition: color 0.3s;
-}
-
-.deleteBtn:hover {
-    color: var(--primary-color);
+  font-size: 10px;
+  margin-left: 3px;
 }
 
 .actions {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* İki ikon arası boşluk */
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
 }
 
 .actionBtn {
@@ -60,11 +58,59 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: transform 0.2s;
   display: flex;
   align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.2s;
+  margin-left: 5px;
+}
+
+.actionBtn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  fill: var(--text-main);
 }
 
 .actionBtn:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   TABLET ve DESKTOP (min-width: 768px)
+   ========================================= */
+@media screen and (min-width: 768px) {
+  .item {
+    margin-bottom: 16px;
+  }
+
+  .name,
+  .weight,
+  .calories {
+     padding-bottom: 20px;
+  }
+
+  .name {
+    width: 240px; 
+    flex: none;
+    margin-right: 22px;
+  }
+
+  .weight {
+    width: 106px;
+    margin-right: 46px;
+    text-align: right;
+  }
+
+  .calories {
+    width: 106px;
+    margin-right: 32px;
+    text-align: right;
+  }
+  
+  .actions {
+      padding-bottom: 20px;
+  }
 }

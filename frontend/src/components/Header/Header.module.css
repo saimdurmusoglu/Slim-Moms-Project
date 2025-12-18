@@ -1,89 +1,168 @@
-.headerWrapper {
-  /* UserInfo ile Header'ı kapsayan dış kutu */
+/* --- GENEL AYARLAR (MOBİL) --- */
+.header {
   width: 100%;
+  position: relative;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
 }
 
-.header {
+.headerTop {
+  background-color: transparent;
   border-bottom: 2px solid var(--text-gray);
-  padding: 20px 0;
-  background-color: var(--secondary-color);
   height: 80px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 50;
 }
 
 .headerContent {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px;
 }
 
-/* Logo Linki (Container) */
 .logoContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
   text-decoration: none;
+  z-index: 60;
 }
-
 .logoContainer img {
   display: block;
-  width: 46.67px;
   height: 44px;
+  width: auto;
 }
 
-/* --- LOGO YAZISI (SlimMom) --- */
-.logoText {
-  font-family: var(--font-family-main);
-  font-size: 18px;
-  line-height: normal;
-  letter-spacing: 0.04em;
+.navLoggedOut {
+  margin-left: auto;
   display: flex;
   align-items: center;
 }
 
-.textSlim {
-  color: var(--text-main);
-  font-weight: var(--font-weight-thin);
+.userInfoDesktopWrapper {
+  display: none;
 }
 
-.textMom {
-  color: var(--primary-color);
-  font-weight: var(--font-weight-thin);
-  margin-left: 1px;
-}
-
-/* --- SAĞ TARAF --- */
-.authNav {
+.userInfoMobileBar {
+  background-color: var(--bg-gray);
+  width: 100%;
+  margin: 0;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
 }
 
-.navLink {
-  font-family: var(--font-family-main);
-  font-weight: var(--font-weight-bold);
-  font-size: 14px;
-  line-height: normal;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  transition: color var(--transition-dur) var(--transition-func);
+/* =========================================
+   TABLET TASARIMI (min-width: 768px)
+   ========================================= */
+@media screen and (min-width: 768px) {
+  .userInfoMobileBar {
+    display: none !important;
+  }
+
+  .headerContent {
+    justify-content: flex-start;
+    padding: 0 32px;
+  }
+
+  .logoContainer {
+    margin-right: 20px;
+    order: 1;
+  }
+
+  .userInfoDesktopWrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: auto;
+    padding-right: 0;
+    order: 2;
+  }
+
+  .navigationWrapper {
+    display: block;
+    order: 3;
+  }
+
+  .navLoggedOut {
+    margin-left: auto;
+    order: 2;
+  }
+
+  .navLoggedIn {
+    margin-left: 0;
+    order: 3;
+  }
 }
 
-.navLink:hover,
-.activeLink {
-  color: var(--text-main);
-}
+/* =========================================
+   DESKTOP TASARIMI (min-width: 1280px)
+   ========================================= */
+@media screen and (min-width: 1280px) {
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+  }
 
-/* .separator {
-    color: var(--text-secondary);
-} */
+  .headerTop {
+    border-bottom: none;
+    height: 150px;
+    align-items: flex-end;
+    padding-bottom: 20px;
+  }
 
-.menuBtn {
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .headerContent {
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 0 16px;
+  }
+
+  .logoContainer {
+    order: 1;
+    margin-right: 0;
+    padding-bottom: 0;
+  }
+  .logoContainer img {
+    height: 66px;
+  }
+
+  .userInfoDesktopWrapper {
+    order: 3;
+    margin-left: 0;
+    padding-right: 0;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4px;
+  }
+
+  .navLoggedIn {
+    order: 2;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0px;
+    transform: translateY(12px);
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 20px;
+  }
+
+  .navLoggedOut {
+    order: 2;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0px;
+    transform: translateY(12px);
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 20px;
+  }
 }

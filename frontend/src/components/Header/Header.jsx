@@ -1,51 +1,63 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Container from '../Container/Container';
-import Navigation from './Navigation';
-import UserInfo from '../UserInfo/UserInfo';
-import styles from './Header.module.css';
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import Navigation from "./Navigation";
+import UserInfo from "../UserInfo/UserInfo";
+import styles from "./Header.module.css";
 
-import logoMobile from '../../assets/icons/logo-mobile.svg';
-import logoTablet from '../../assets/icons/logo-tablet.svg';
-import logoDesktop from '../../assets/icons/logo-desktop.svg';
+import logoMobile from "../../assets/icons/logo_mobile.svg";
+import logoMobileLogin from "../../assets/icons/logo_mobile_login.svg";
+import logoTablet from "../../assets/icons/logo_tablet.svg";
+import logoDesktop from "../../assets/icons/logo_desktop.svg";
 
 const Header = () => {
-  // Redux'taki isLoggedIn değerini anlık dinliyoruz
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
-    <div className={styles.headerWrapper}>
-      
-      <header className={styles.header}>
-        <Container>
-          <div className={styles.headerContent}>
-            
-            <Link to="/" className={styles.logoContainer}>
-              <picture>
-                <source media="(min-width: 1280px)" srcSet={logoDesktop} />
-                <source media="(min-width: 768px)" srcSet={logoTablet} />
-                <img src={logoMobile} alt="Slim Moms Logo" />
-              </picture>
+    <header className={styles.header}>
+      <div className={styles.headerTop}>
+        <div className={styles.headerContent}>
+          <Link
+            to={isLoggedIn ? "/diary" : "/"}
+            className={styles.logoContainer}
+            aria-label="Slim Mom Home"
+          >
+            <picture>
+              <source media="(min-width: 1280px)" srcSet={logoDesktop} />
+              <source media="(min-width: 768px)" srcSet={logoTablet} />
+              <img
+                src={isLoggedIn ? logoMobileLogin : logoMobile}
+                alt="Slim Mom Logo"
+                fetchPriority="high"
+                loading="eager"
+                width="44"
+                height="44"
+              />
+            </picture>
+          </Link>
 
-              {/* Login ise yazıyı göster */}
-              {isLoggedIn && (
-                <span className={styles.logoText}>
-                  <span className={styles.textSlim}>Slim</span>
-                  <span className={styles.textMom}>Mom</span>
-                </span>
-              )}
-            </Link>
-
+          <div
+            className={`
+                ${styles.navigationWrapper} 
+                ${isLoggedIn ? styles.navLoggedIn : styles.navLoggedOut}
+              `}
+          >
             <Navigation />
           </div>
-        </Container>
-      </header>
 
-      {/* --- KRİTİK NOKTA --- */}
-      {/* isLoggedIn false olunca burası DOM'dan tamamen silinir */}
-      {isLoggedIn && <UserInfo />}
-      
-    </div>
+          {isLoggedIn && (
+            <div className={styles.userInfoDesktopWrapper}>
+              <UserInfo />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {isLoggedIn && (
+        <div className={styles.userInfoMobileBar}>
+          <UserInfo />
+        </div>
+      )}
+    </header>
   );
 };
 

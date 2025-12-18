@@ -1,37 +1,58 @@
-import { useEffect } from 'react'; // Eklendi
-import { useSelector } from 'react-redux'; // Eklendi
-import { setToken } from './services/api'; // api.js'den import et
-import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
-import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import CalculatorPage from './pages/CalculatorPage/CalculatorPage';
-import DiaryPage from './pages/DiaryPage/DiaryPage';
+import {useEffect, lazy, Suspense} from "react"; // lazy ve Suspense eklendi
+import {useSelector, useDispatch} from "react-redux";
+import {Routes, Route} from "react-router-dom";
+import {fetchCurrentUser} from "./redux/auth/authOperations";
+import {setToken} from "./services/api";
+
+import Container from "./components/Container/Container";
+import Header from "./components/Header/Header";
+import Loader from "./components/Loader/Loader";
+import styles from "./App.module.css";
+
+const RegistrationPage = lazy(() =>
+  import("./pages/RegistrationPage/RegistrationPage")
+);
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const CalculatorPage = lazy(() =>
+  import("./pages/CalculatorPage/CalculatorPage")
+);
+const DiaryPage = lazy(() => import("./pages/DiaryPage/DiaryPage"));
 
 function App() {
-  // Redux'tan token'ı al
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const isRefreshing = useSelector((state) => state.auth.isRefreshing);
+  const isAuthLoading = useSelector((state) => state.auth.isLoading);
 
-  // Sayfa yüklendiğinde token varsa Axios'a yapıştır
   useEffect(() => {
     if (token) {
       setToken(token);
+      dispatch(fetchCurrentUser());
     }
-  }, [token]);
+  }, [dispatch, token]);
+
+  if (isRefreshing) {
+    return <Loader />;
+  }
 
   return (
-    <>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<CalculatorPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/calculator" element={<CalculatorPage />} />
-          <Route path="/diary" element={<DiaryPage />} />
-        </Routes>
-      </main>
-    </>
+    <Container>
+      {isAuthLoading && <Loader />}
+      <div className={styles.appWrapper}>
+        <Header />
+        <main className={styles.mainContent}>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<CalculatorPage />} />
+              <Route path="/register" element={<RegistrationPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/calculator" element={<CalculatorPage />} />
+              <Route path="/diary" element={<DiaryPage />} />
+            </Routes>
+          </Suspense>
+        </main>
+      </div>
+    </Container>
   );
 }
 

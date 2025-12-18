@@ -10,13 +10,12 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // LocalStorage
+import storage from 'redux-persist/lib/storage';
 
-// Auth için persist ayarı
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'], // Sadece token'ı saklasak yeter (user bilgisini de saklayabiliriz)
+  whitelist: ['token'],
 };
 
 export const store = configureStore({

@@ -1,3 +1,4 @@
+/* --- MOBİL --- */
 .container {
   width: 100%;
   height: 100%;
@@ -6,13 +7,13 @@
 }
 
 .headerBar {
-  background-color: #EFF1F3;
+  background-color: var(--bg-gray);
   width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
   padding-left: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
 }
 
 .backBtn {
@@ -24,74 +25,41 @@
   align-items: center;
 }
 
+.backBtn svg {
+    stroke: var(--text-main);
+}
+
 .form {
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 32px;
 }
 
 .inputGroup {
-  position: relative; /* Liste buna göre konumlanacak */
+  position: relative;
   display: flex;
   flex-direction: column;
-  z-index: 20; /* Input grubu üstte olsun */
+  width: 100%;
 }
 
 .label {
   font-family: var(--font-family-main);
   font-weight: var(--font-weight-bold);
   font-size: 14px;
-  color: #9B9FAA;
+  color: var(--text-secondary);
   margin-bottom: 5px;
-  letter-spacing: 0.04em;
 }
 
 .input {
   border: none;
-  border-bottom: 1px solid #E0E0E0;
-  padding: 10px 0;
+  border-bottom: 1px solid var(--text-gray);
+  padding: 0 0 10px 0;
   font-size: 14px;
-  font-weight: var(--font-weight-bold);
   color: var(--text-main);
   background: transparent;
   outline: none;
-  transition: border-color 0.3s;
-}
-
-.input:focus {
-  border-bottom: 1px solid var(--primary-color);
-}
-
-/* --- AUTOCOMPLETE LISTESI (Düzeltildi) --- */
-.suggestionsList {
-  position: absolute;
-  top: 100%;
-  left: 0;
   width: 100%;
-  background-color: #FFFFFF; /* Zemin Beyaz */
-  border: 2px solid #FC842D; /* Turuncu Çerçeve (Görmek için) */
-  max-height: 250px;
-  overflow-y: auto;
-  z-index: 100; /* En, en üste çıkar */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Koyu gölge */
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.suggestionItem {
-  padding: 15px;
-  font-size: 14px;
-  cursor: pointer;
-  color: #000000; /* Yazı Siyah (Garanti) */
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
-}
-
-.suggestionItem:hover {
-  background-color: #ffe6d9; /* Hover olunca açık turuncu */
-  font-weight: bold;
 }
 
 .addBtn {
@@ -102,15 +70,101 @@
   color: var(--secondary-color);
   border: none;
   border-radius: 30px;
-  font-family: var(--font-family-main);
-  font-weight: var(--font-weight-bold);
-  font-size: 14px;
-  letter-spacing: 0.04em;
+  font-weight: 700;
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
   cursor: pointer;
-  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.addBtn:hover {
-  background-color: #e67522;
+.suggestionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--text-gray);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--text-gray);
+}
+.suggestionItem:hover {
+  background-color: var(--secondary-color);
+}
+
+/* =========================================
+   TABLET ve DESKTOP (Inline Form) 
+   ========================================= */
+.desktopContainer {
+  width: 100%;
+  height: auto;
+  padding-top: 0;
+}
+
+.desktopForm {
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 0;
+  gap: 0;
+}
+
+.desktopForm .inputGroup:first-child {
+  width: 240px;
+  margin-right: 24px;
+  flex: unset;
+}
+
+.desktopForm .gramsGroup {
+  width: 106px;
+  margin-right: 48px;
+  flex: unset;
+}
+
+.desktopForm .input {
+  width: 100%;
+  text-align: left;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--text-gray);
+}
+
+.desktopForm .gramsGroup .input {
+  text-align: right;
+}
+
+.desktopAddBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+  margin-bottom: -15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+}
+
+.desktopAddBtn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--secondary-color);
+}
+
+@media screen and (min-width: 768px) {
+  .input {
+    border-bottom: 1px solid var(--text-gray);
+  }
 }

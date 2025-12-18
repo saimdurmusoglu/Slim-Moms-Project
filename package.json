@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "modern-normalize": "^3.0.1"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5",
+    "vite-plugin-image-optimizer": "^2.0.3"
+  }
+}
