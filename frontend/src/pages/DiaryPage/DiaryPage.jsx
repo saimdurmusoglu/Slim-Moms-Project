@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import {useState, useEffect} from "react";
+import {useSelector} from "react-redux";
 import DiaryDateCalendar from "../../components/DiaryDateCalendar/DiaryDateCalendar";
 import DiaryProductListItem from "../../components/DiaryProductListItem/DiaryProductListItem";
 import RightSideBar from "../../components/RightSideBar/RightSideBar";
@@ -7,7 +7,7 @@ import Modal from "../../components/Modal/Modal";
 import DiaryAddProductForm from "../../components/DiaryAddProductForm/DiaryAddProductForm";
 import styles from "./DiaryPage.module.css";
 import PlusIcon from "../../assets/icons/plus.svg?react";
-import { instance } from "../../services/api";
+import {instance} from "../../services/api";
 
 const DiaryPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -15,39 +15,50 @@ const DiaryPage = () => {
   const [diaryId, setDiaryId] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
   const token = useSelector((state) => state.auth.token);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const fetchDiary = async () => {
-    if (!token) return;
-    try {
-      const offset = selectedDate.getTimezoneOffset();
-      const date = new Date(selectedDate.getTime() - offset * 60 * 1000);
-      const formattedDate = date.toISOString().split("T")[0];
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-
-      const { data } = await instance.post(
-        "/diary/day",
-        { date: formattedDate },
-        config
-      );
-
-      if (data.data && data.data.products) {
-        setProducts(data.data.products);
-        setDiaryId(data.data._id);
-      } else {
-        setProducts([]);
-        setDiaryId(null);
-      }
-    } catch (error) {
-      console.error("Veri çekme hatası:", error.message);
-    }
-  };
-
   useEffect(() => {
+    let isMounted = true;
+
+    const fetchDiary = async () => {
+      if (!token) return;
+      try {
+        const offset = selectedDate.getTimezoneOffset();
+        const date = new Date(selectedDate.getTime() - offset * 60 * 1000);
+        const formattedDate = date.toISOString().split("T")[0];
+        const config = {headers: {Authorization: `Bearer ${token}`}};
+
+        const {data} = await instance.post(
+          "/diary/day",
+          {date: formattedDate},
+          config
+        );
+
+        if (isMounted) {
+          if (data.data && data.data.products) {
+            setProducts(data.data.products);
+            setDiaryId(data.data._id);
+          } else {
+            setProducts([]);
+            setDiaryId(null);
+          }
+        }
+      } catch (error) {
+        console.error("Veri çekme hatası:", error.message);
+      }
+    };
+
     fetchDiary();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedDate, token]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedDate, token, refreshTrigger]);
+
+  const refreshDiary = () => setRefreshTrigger((prev) => prev + 1);
 
   const openAddModal = () => {
     setEditingItem(null);
@@ -65,15 +76,12 @@ const DiaryPage = () => {
       const offset = selectedDate.getTimezoneOffset();
       const date = new Date(selectedDate.getTime() - offset * 60 * 1000);
       const formattedDate = date.toISOString().split("T")[0];
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = {headers: {Authorization: `Bearer ${token}`}};
 
       if (editingItem) {
         await instance.patch(
           `/diary/update/${editingItem._id}`,
-          {
-            weight: productData.weight,
-            date: formattedDate,
-          },
+          {weight: productData.weight, date: formattedDate},
           config
         );
       } else {
@@ -87,7 +95,7 @@ const DiaryPage = () => {
 
       setIsAddModalOpen(false);
       setEditingItem(null);
-      fetchDiary();
+      refreshDiary();
     } catch (error) {
       console.error("İşlem hatası:", error);
     }
@@ -96,9 +104,9 @@ const DiaryPage = () => {
   const handleDelete = async (productId) => {
     if (!diaryId || !token) return;
     try {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = {headers: {Authorization: `Bearer ${token}`}};
       await instance.delete(`/diary/${diaryId}/${productId}`, config);
-      fetchDiary();
+      refreshDiary();
     } catch (error) {
       console.error("Silme hatası", error);
     }
@@ -123,7 +131,11 @@ const DiaryPage = () => {
           />
 
           <div className={styles.desktopFormWrapper}>
-            <DiaryAddProductForm onSave={handleSaveProduct} isMobile={false} />
+            <DiaryAddProductForm
+              onSave={handleSaveProduct}
+              isMobile={false}
+              isModal={false}
+            />
           </div>
 
           <div className={styles.productList}>
@@ -144,13 +156,11 @@ const DiaryPage = () => {
           <button
             className={styles.mobileAddBtn}
             onClick={openAddModal}
-            aria-label="Add new food item"
             title="Add food"
           >
             <PlusIcon />
           </button>
         </div>
-
         <div className={styles.rightSide}>
           <RightSideBar consumed={totalCalories} isDiary={true} />
         </div>
@@ -163,6 +173,7 @@ const DiaryPage = () => {
             onClose={() => setIsAddModalOpen(false)}
             initialData={editingItem}
             isMobile={true}
+            isModal={true}
           />
         </Modal>
       )}

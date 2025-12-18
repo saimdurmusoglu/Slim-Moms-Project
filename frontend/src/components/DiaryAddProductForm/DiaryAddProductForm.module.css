@@ -7,13 +7,17 @@
 }
 
 .headerBar {
+  display: none; 
   background-color: var(--bg-gray);
   width: 100%;
   height: 40px;
-  display: flex;
   align-items: center;
   padding-left: 20px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
+}
+
+.modalVersion .headerBar {
+  display: flex;
 }
 
 .backBtn {
@@ -36,19 +40,15 @@
   gap: 32px;
 }
 
+.modalVersion .form {
+  padding-top: 20px;
+}
+
 .inputGroup {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.label {
-  font-family: var(--font-family-main);
-  font-weight: var(--font-weight-bold);
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 5px;
 }
 
 .input {
@@ -112,6 +112,7 @@
 }
 
 .desktopForm {
+  display: flex;
   flex-direction: row;
   align-items: flex-end;
   padding: 0;
@@ -157,14 +158,35 @@
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
 
-.desktopAddBtn svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--secondary-color);
+/* TABLET (min-width: 768px) */
+@media screen and (min-width: 768px) {
+  .headerBar {
+    display: none !important;
+  }
+
+  .form {
+    padding-top: 0;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0;
+  }
+
+  .modalVersion .form {
+    padding-top: 60px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  
+  .modalVersion .inputGroup {
+    width: 100%;
+    margin-right: 0;
+  }
 }
 
-@media screen and (min-width: 768px) {
-  .input {
-    border-bottom: 1px solid var(--text-gray);
+/* DESKTOP (min-width: 1280px) */
+@media screen and (min-width: 1280px) {
+  .modalVersion .form {
+    padding-top: 80px;
   }
 }
