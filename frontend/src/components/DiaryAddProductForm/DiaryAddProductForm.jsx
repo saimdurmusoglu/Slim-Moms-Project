@@ -99,6 +99,12 @@ const DiaryAddProductForm = ({
         </div>
       )}
 
+      {isModal && (
+        <h2 className={styles.modalTitle}>
+          {initialData ? "Edit product" : "Add product"}
+        </h2>
+      )}
+
       <form className={`${styles.form} ${!isMobile ? styles.desktopForm : ""}`} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
           <input

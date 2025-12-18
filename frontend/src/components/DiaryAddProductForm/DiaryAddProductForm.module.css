@@ -158,6 +158,18 @@
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
 
+.modalTitle {
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-bold);
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase; /* Başlığı daha belirgin yapar */
+}
+
 /* TABLET (min-width: 768px) */
 @media screen and (min-width: 768px) {
   .headerBar {
@@ -181,6 +193,12 @@
   .modalVersion .inputGroup {
     width: 100%;
     margin-right: 0;
+  }
+
+  .modalTitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+    padding-top: 10px; /* X butonuyla hizalamayı dengeler */
   }
 }
 
